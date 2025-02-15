@@ -15,7 +15,7 @@ A Laravel package to generate CRUD scaffolding inspire by Symfony's make:crud.
    Run the following command in your Laravel project:
    ```bash
 
-     composer require iamchris/laravel-autocrud  ^1.0
+     composer require iamchris/laravel-autocrud
 
   ```
   Publish the Package Configuration (if applicable):
