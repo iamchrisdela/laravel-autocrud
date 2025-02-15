@@ -7,11 +7,6 @@
         "php": "^8",
         "laravel/framework": "^11"
     },
-    "require-dev": {
-        "phpunit/phpunit": "^10.0",
-        "mockery/mockery": "^1.6",
-        "fakerphp/faker": "^1.23"
-    },
     "autoload": {
         "psr-4": {
             "Iamchris\\LaravelCrud\\": "src/"
@@ -34,5 +29,5 @@
         "LGPL-2.1-only",
         "GPL-3.0-or-later"
     ],
-    "minimum-stability": "stable"
+    "minimum-stability": "dev"
 }
