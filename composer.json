@@ -2,7 +2,7 @@
     "name": "iamchris/laravel-autocrud",
     "description": "A Laravel package to generate CRUD scaffolding inspire by Symfony's make:crud.",
     "type": "library",
-    "version": "1.0.2",
+    "version": "1.0.0",
     "require": {
         "php": "^8",
         "laravel/framework": "^11"
