@@ -1,0 +1,34 @@
+{
+    "name": "iamchris/laravel-crud",
+    "description": "A Laravel package to generate CRUD scaffolding inspire by Symfony's make:crud.",
+    "type": "library",
+    "version": "1.0.0",
+    "require": {
+        "php": "^8",
+        "laravel/framework": "^11"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^10.0",
+        "mockery/mockery": "^1.6",
+        "fakerphp/faker": "^1.23"
+    },
+    "autoload": {
+        "psr-4": {
+            "Iamchris\\LaravelCrud\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "iamchris\\LaravelCrud\\LaravelCrudServiceProvider"
+            ]
+        }
+    },
+    "authors": [
+        {
+            "name": "Christian Valentine Tsigbey",
+            "email": "iamtsigbey@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable"
+}

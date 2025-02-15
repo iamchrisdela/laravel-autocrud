@@ -1,0 +1,34 @@
+@extends('layouts.app')
+
+@section('content')
+    <h1>{{modelName}} List</h1>
+    <a href="{{ route('{{modelVariable}}.create') }}">Create New</a>
+    <table>
+        <thead>
+            <tr>
+                @foreach (['id', {{fieldsArray}}] as $field)
+                    <th>{{ ucfirst($field) }}</th>
+                @endforeach
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (${{modelVariable}}s as ${{modelVariable}})
+                <tr>
+                    @foreach (['id', {{fieldsArray}}] as $field)
+                        <td>{{ ${{modelVariable}}->$field }}</td>
+                    @endforeach
+                    <td>
+                        <a href="{{ route('{{modelVariable}}.show', ${{modelVariable}}) }}">Show</a>
+                        <a href="{{ route('{{modelVariable}}.edit', ${{modelVariable}}) }}">Edit</a>
+                        <form action="{{ route('{{modelVariable}}.destroy', ${{modelVariable}}) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
+@endsection

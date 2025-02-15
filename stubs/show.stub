@@ -1,0 +1,9 @@
+@extends('layouts.app')
+
+@section('content')
+    <h1>{{modelName}} Details</h1>
+    @foreach (['id', {{fieldsArray}}] as $field)
+        <p><strong>{{ ucfirst($field) }}:</strong> {{ ${{modelVariable}}->$field }}</p>
+    @endforeach
+    <a href="{{ route('{{modelVariable}}.index') }}">Back</a>
+@endsection

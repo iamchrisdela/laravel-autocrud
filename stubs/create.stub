@@ -1,0 +1,10 @@
+@extends('layouts.app')
+
+@section('content')
+    <h1>{{modelName}} Form</h1>
+    <form action="{{ route('{{modelVariable}}.store') }}" method="POST">
+        @csrf
+        {{fields}}
+        <button type="submit">Submit</button>
+    </form>
+@endsection
