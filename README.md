@@ -9,6 +9,11 @@ A Laravel package to generate CRUD scaffolding inspire by Symfony's make:crud.
 - Easy to use with a single Artisan command.
 ---  
 
+## Requirements
+
+- PHP 8.1 or higher
+- Laravel 11 or 12
+
 ## Installation
 
 1. **Install via Composer**:
