@@ -25,7 +25,7 @@ A Laravel package to generate CRUD scaffolding inspire by Symfony's make:crud.
   ```
   Publish the Package Configuration (if applicable):
 
-     php artisan vendor:publish --provider="iamchris\LaravelCrud\LaravelCrudServiceProvider"
+     php artisan vendor:publish --provider="iamchris\LaravelCrud\LaravelCrudServiceProvider" --tag=laravel-autocrud-stubs
 
  
 
