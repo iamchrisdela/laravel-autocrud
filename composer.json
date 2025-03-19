@@ -12,6 +12,13 @@
             "Iamchris\\LaravelCrud\\": "src/"
         }
     },
+    "files": [
+        "stubs/controller.stub",
+        "stubs/index.stub",
+        "stubs/create.stub",
+        "stubs/edit.stub",
+        "stubs/show.stub"
+    ],
     "extra": {
         "laravel": {
             "providers": [
