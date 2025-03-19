@@ -1,9 +1,13 @@
-@extends('layouts.app')
+<x-layouts.app>
 
-@section('content')
-    <h1>{{modelName}} Details</h1>
-    @foreach (['id', {{fieldsArray}}] as $field)
-        <p><strong>{{ ucfirst($field) }}:</strong> {{ ${{modelVariable}}->$field }}</p>
-    @endforeach
-    <a href="{{ route('{{modelVariable}}.index') }}">Back</a>
-@endsection
+   <div class="container mx-auto px-4">
+           <h1 class="text-2xl font-bold mb-4">{{modelName}} Details</h1>
+           <div class="bg-white p-6 rounded-lg shadow-md">
+               <p class="mb-2"><strong>ID:</strong> {{ ${{modelVariable}}->id }}</p>
+               @foreach ($fields as $field)
+                   <p class="mb-2"><strong>{{ ucfirst(str_replace('_id', '', $field)) }}:</strong> {{ ${{modelVariable}}->$field }}</p>
+               @endforeach
+               <a href="{{ route('{{modelVariable}}.index') }}" class="bg-blue-500 text-white px-4 py-2 rounded mt-4">Back</a>
+           </div>
+       </div>
+</x-layouts.app>

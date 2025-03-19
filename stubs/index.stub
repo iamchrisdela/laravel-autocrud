@@ -1,34 +1,40 @@
-@extends('layouts.app')
+<x-layouts.app>
 
-@section('content')
-    <h1>{{modelName}} List</h1>
-    <a href="{{ route('{{modelVariable}}.create') }}">Create New</a>
-    <table>
-        <thead>
-            <tr>
-                @foreach (['id', {{fieldsArray}}] as $field)
-                    <th>{{ ucfirst($field) }}</th>
-                @endforeach
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (${{modelVariable}}s as ${{modelVariable}})
-                <tr>
-                    @foreach (['id', {{fieldsArray}}] as $field)
-                        <td>{{ ${{modelVariable}}->$field }}</td>
+   <div class="container mx-auto px-4">
+        <h1 class="text-2xl font-bold mb-4">{{modelName}} List</h1>
+        <a href="{{ route('{{modelVariable}}.create') }}" class="bg-blue-500 text-white px-4 py-2 rounded">Create New</a>
+        <div class="mt-6">
+            <table class="min-w-full bg-white border border-gray-300">
+                <thead>
+                    <tr class="bg-gray-100">
+                        <th class="py-2 px-4 border-b">ID</th>
+                        @foreach ($fields as $field)
+                            <th class="py-2 px-4 border-b">{{ ucfirst(str_replace('_id', '', $field)) }}</th>
+                        @endforeach
+                        <th class="py-2 px-4 border-b">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (${{modelVariable}}s as ${{modelVariable}})
+                        <tr class="hover:bg-gray-50">
+                            <td class="py-2 px-4 border-b">{{ ${{modelVariable}}->id }}</td>
+                            @foreach ($fields as $field)
+                                <td class="py-2 px-4 border-b">{{ ${{modelVariable}}->$field }}</td>
+                            @endforeach
+                            <td class="py-2 px-4 border-b">
+                                <a href="{{ route('{{modelVariable}}.show', ${{modelVariable}}) }}" class="text-blue-500 hover:underline">Show</a>
+                                <a href="{{ route('{{modelVariable}}.edit', ${{modelVariable}}) }}" class="text-green-500 hover:underline ml-2">Edit</a>
+                                <form action="{{ route('{{modelVariable}}.destroy', ${{modelVariable}}) }}" method="POST" class="inline">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="text-red-500 hover:underline ml-2">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
                     @endforeach
-                    <td>
-                        <a href="{{ route('{{modelVariable}}.show', ${{modelVariable}}) }}">Show</a>
-                        <a href="{{ route('{{modelVariable}}.edit', ${{modelVariable}}) }}">Edit</a>
-                        <form action="{{ route('{{modelVariable}}.destroy', ${{modelVariable}}) }}" method="POST">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit">Delete</button>
-                        </form>
-                    </td>
-                </tr>
-            @endforeach
-        </tbody>
-    </table>
-@endsection
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</x-layouts.app>

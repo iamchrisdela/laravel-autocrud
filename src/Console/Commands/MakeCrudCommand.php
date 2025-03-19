@@ -73,7 +73,7 @@ class MakeCrudCommand extends Command
     protected function getControllerStub($modelName, $fields)
     {
         //$stubPath = __DIR__ . '/../../../stubs/controller.stub';
-        $stubPath = base_path('stubs/vendor/laravel-autocrud/controller.stub');
+        $stubPath = base_path('resources/vendor/laravel-autocrud/stubs/controller.stub');
         if (!file_exists($stubPath)) {
             $this->error("Stub file not found: $stubPath");
             return;
@@ -126,7 +126,7 @@ class MakeCrudCommand extends Command
     protected function getViewStub($view, $modelName, $fields)
     {
         //$stubPath = __DIR__ . '/../../../stubs/' . $view . '.stub';
-        $stubPath = base_path('stubs/vendor/laravel-autocrud/' . $view . '.stub'); // Published path
+        $stubPath = base_path('resources/vendor/stubs/laravel-autocrud/' . $view . '.stub'); // Published path
         if (!file_exists($stubPath)) {
             $this->error("Stub file not found: $stubPath");
             return;
@@ -144,10 +144,11 @@ class MakeCrudCommand extends Command
     {
         $formFields = [];
         foreach ($fields as $field) {
+            $label = ucfirst(str_replace('_id', '', $field)); // Remove "_id" suffix
             $formFields[] = <<<EOT
-        <div class="form-group">
-            <label for="$field">$field</label>
-            <input type="text" name="$field" id="$field" class="form-control" value="{{ old('$field') }}">
+        <div class="mb-4">
+            <label for="$field" class="block text-sm font-medium text-gray-700">$label</label>
+            <input type="text" name="$field" id="$field" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
         </div>
 EOT;
         }
