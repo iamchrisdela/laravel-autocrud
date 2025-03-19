@@ -126,7 +126,7 @@ class MakeCrudCommand extends Command
     protected function getViewStub($view, $modelName, $fields)
     {
         //$stubPath = __DIR__ . '/../../../stubs/' . $view . '.stub';
-        $stubPath = base_path('resources/vendor/stubs/laravel-autocrud/' . $view . '.stub'); // Published path
+        $stubPath = base_path('resources/vendor/laravel-autocrud/stubs' . $view . '.stub'); // Published path
         if (!file_exists($stubPath)) {
             $this->error("Stub file not found: $stubPath");
             return;
