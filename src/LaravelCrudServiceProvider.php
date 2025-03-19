@@ -12,7 +12,7 @@ class LaravelCrudServiceProvider extends ServiceProvider
                 MakeCrudCommand::class,
             ]);
             $this->publishes([
-                __DIR__ . '/../../../stubs' => base_path('stubs/vendor/laravel-autocrud'),
+                __DIR__ . '/../stubs' => base_path('stubs/vendor/laravel-autocrud'),
             ], 'laravel-autocrud-stubs');
         }
     }
