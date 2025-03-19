@@ -2,7 +2,7 @@
 
    <div class="container mx-auto px-4">
         <h1 class="text-2xl font-bold mb-4">{{modelName}} List</h1>
-        <a href="{{ route('{{modelVariable}}.create') }}" class="bg-blue-500 text-white px-4 py-2 rounded">Create New</a>
+        <a href="{{ route('{{modelVariable}}.create') }}" class="bg-black text-white px-4 py-2 rounded">Create New</a>
         <div class="mt-6">
             <table class="min-w-full bg-white border border-gray-300">
                 <thead>
@@ -22,9 +22,9 @@
                                 <td class="py-2 px-4 border-b">{{ ${{modelVariable}}->$field }}</td>
                             @endforeach
                             <td class="py-2 px-4 border-b">
-                                <a href="{{ route('{{modelVariable}}.show', ${{modelVariable}}) }}" class="text-blue-500 hover:underline">Show</a>
-                                <a href="{{ route('{{modelVariable}}.edit', ${{modelVariable}}) }}" class="text-green-500 hover:underline ml-2">Edit</a>
-                                <form action="{{ route('{{modelVariable}}.destroy', ${{modelVariable}}) }}" method="POST" class="inline">
+                                <a href="{{ route('{{modelVariable}}.show', ${{modelVariable}}->id) }}" class="text-blue-500 hover:underline">Show</a>
+                                <a href="{{ route('{{modelVariable}}.edit', ${{modelVariable}}->id) }}" class="text-green-500 hover:underline ml-2">Edit</a>
+                                <form action="{{ route('{{modelVariable}}.destroy', ${{modelVariable}}->id) }}" method="POST" class="inline">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="text-red-500 hover:underline ml-2">Delete</button>

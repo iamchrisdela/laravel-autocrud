@@ -1,10 +1,18 @@
 <x-layouts.app>
-       <div class="container mx-auto px-4">
-               <h1 class="text-2xl font-bold mb-4">Create {{modelName}}</h1>
-               <form action="{{ route('{{modelVariable}}.store') }}" method="POST" class="bg-white p-6 rounded-lg shadow-md">
-                   @csrf
-                   {{fields}}
-                   <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded mt-4">Submit</button>
-               </form>
-           </div>
+<form action="{{ route('{{modelVariable}}.store') }}" method="POST">
+    @csrf
+
+  <div class="space-y-12 sm:space-y-16">
+    <div>
+      <h2 class="text-base/7 font-semibold text-gray-900">Create {{modelName}}</h2>
+      <p class="mt-1 max-w-2xl text-sm/6 text-gray-600">This information will be displayed publicly so be careful what you share.</p>
+      <div class="mt-10 space-y-8 border-b border-gray-900/10 pb-12 sm:space-y-0 sm:divide-y sm:divide-gray-900/10 sm:border-t sm:pb-0">
+          {{fields}}
+     </div>
+    </div>
+    </div>
+    <div class="mt-6 flex items-center justify-end gap-x-6">
+        <button type="submit" class="inline-flex justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Save</button>
+    </div>
+</form>
 </x-layouts.app>

@@ -10,12 +10,14 @@ class {{modelName}}Controller extends Controller
     public function index()
     {
         ${{modelVariable}}s = {{modelName}}::all();
-        return view('{{modelVariable}}.index', compact('{{modelVariable}}s'));
+        $fields = (new {{modelName}})->getFillable(); // Get fillable fields
+            return view('{{modelVariable}}.index', compact('{{modelVariable}}s', 'fields'));
     }
 
     public function create()
     {
-        return view('{{modelVariable}}.create');
+        $fields = (new {{modelName}})->getFillable(); // Get fillable fields
+        return view('{{modelVariable}}.create', compact('fields'));
     }
 
     public function store(Request $request)
@@ -30,12 +32,14 @@ class {{modelName}}Controller extends Controller
 
     public function show({{modelName}} ${{modelVariable}})
     {
-        return view('{{modelVariable}}.show', compact('{{modelVariable}}'));
+        $fields = (new {{modelName}})->getFillable(); // Get fillable fields
+        return view('{{modelVariable}}.show', compact('{{modelVariable}}', 'fields'));
     }
 
     public function edit({{modelName}} ${{modelVariable}})
     {
-        return view('{{modelVariable}}.edit', compact('{{modelVariable}}'));
+        $fields = (new {{modelName}})->getFillable(); // Get fillable fields
+        return view('{{modelVariable}}.edit', compact('{{modelVariable}}', 'fields'));
     }
 
     public function update(Request $request, {{modelName}} ${{modelVariable}})

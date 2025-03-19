@@ -135,30 +135,62 @@ class MakeCrudCommand extends Command
         $stub = file_get_contents($stubPath);
         $stub = str_replace('{{modelName}}', $modelName, $stub);
         $stub = str_replace('{{modelVariable}}', Str::camel($modelName), $stub);
-        $stub = str_replace('{{fields}}', $this->getFieldsForForm($fields), $stub);
+
+        // Pass the model variable to the edit view
+        // Pass the model variable to the edit view
+        if ($view === 'edit') {
+            $stub = str_replace('{{fields}}', $this->getFieldsForForm($fields, Str::camel($modelName)), $stub);
+        } else {
+            $stub = str_replace('{{fields}}', $this->getFieldsForForm($fields), $stub);
+        }
+
 
         return $stub;
     }
 
-    protected function getFieldsForForm($fields)
+    protected function getFieldsForForm($fields, $modelVariable = null)
     {
         $formFields = [];
         foreach ($fields as $field) {
-            $label = ucfirst(str_replace('_id', '', $field)); // Remove "_id" suffix
+            // Remove "_id" suffix from the field name
+            $fieldName = str_replace('_id', '', $field);
+            $label = ucfirst($fieldName); // Capitalize the first letter for the label
+
+            // Use Blade syntax to dynamically populate the value
+            $value = $modelVariable ? "{{ \${$modelVariable}->{$field} }}" : '';
+            //            <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+//              <label for="$fieldName" class="block text-sm/6 font-medium text-gray-900 sm:pt-1.5">$label</label>
+//              <div class="mt-2 sm:col-span-2 sm:mt-0">
+//                <input type="text" name="$fieldName" id="$fieldName" autocomplete="$fieldName" class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:max-w-xs sm:text-sm/6">
+//              </div>
+//            </div>
+
             $formFields[] = <<<EOT
-        <div class="mb-4">
-            <label for="$field" class="block text-sm font-medium text-gray-700">$label</label>
-            <input type="text" name="$field" id="$field" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
-        </div>
-EOT;
+            <div class="mb-4">
+                <label for="$fieldName" class="block text-sm font-medium text-gray-700">$label</label>
+                <input type="text" name="$fieldName" id="$fieldName" value="$value" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+            </div>
+            EOT;
         }
         return implode("\n", $formFields);
     }
 
     protected function appendRoutes($modelName)
     {
+        $routeName = Str::kebab($modelName);
+
+        $this->info($routeName);
+
+        $routeUse = "use App\Http\Controllers\\{$modelName}Controller;";
         $routeContent = "Route::resource('" . Str::kebab($modelName) . "', " . $modelName . "Controller::class);";
+
+
+
+
+
+
         $routesFilePath = base_path('routes/web.php');
+//        Route::resource(Str::kebab($modelName), {$modelName}Controller::class);
 
         // Read the existing routes file
         $existingRoutes = file_get_contents($routesFilePath);
@@ -170,7 +202,7 @@ EOT;
         }
 
         // Append the route to the web.php file
-        file_put_contents($routesFilePath, PHP_EOL . $routeContent, FILE_APPEND);
+        file_put_contents($routesFilePath, $routeUse . "\n" . $routeContent, FILE_APPEND);
 
         $this->info("Routes added for $modelName");
     }
